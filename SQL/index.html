@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chat with JSON!</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js"></script>
+    <script src="client.js"></script> 
+  </head>
+  <body>
+     <div id="messaging">
+      <form id = "messageForm">
+        <h4>Send a message!</h4>
+        Message: <input type="text" value="A/S/L?" id="message"><br>
+        <input type="submit">
+      </form>
+      <form id = "newChatRoom">
+        <h4>Make a private room!</h4>
+        Room Name:<input type="text" id="roomNameInput"><br>
+        <input type="submit">
+      </form>
+     </div>
+      <h1>Chat with JSON!</h1>
+      <ul id="message-list">
+      </ul>
+    </div>
+    <script>
+      $(document).ready(function(){
+        var username = prompt("What yo name?")
+        getMessages(window.roomName);
+        refreshMessages(window.roomName);
+
+        $('form#messageForm').on("submit", function(event){
+          event.preventDefault();
+          var message = $('#message').val();
+          sendMessage(username, message, window.roomName);
+          $('#message').val('')
+          getMessages(window.roomName)
+        });
+
+        $('form#newChatRoom').on("submit", function(event){
+          event.preventDefault();
+          window.roomName = $('#roomNameInput').val();
+        });
+      });
+    </script>
+  </body>
+</html>
